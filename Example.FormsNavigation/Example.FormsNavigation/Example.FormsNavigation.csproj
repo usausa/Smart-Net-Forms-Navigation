@@ -41,6 +41,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IComponentProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +127,10 @@
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Smart.Forms.Navigation.Resolver\Smart.Forms.Navigation.Resolver.csproj">
+      <Project>{8cb1d2e3-94bd-4642-9cb4-988eb1e311be}</Project>
+      <Name>Smart.Forms.Navigation.Resolver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Smart.Forms.Navigation\Smart.Forms.Navigation.csproj">
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>Smart.Forms.Navigation</Name>

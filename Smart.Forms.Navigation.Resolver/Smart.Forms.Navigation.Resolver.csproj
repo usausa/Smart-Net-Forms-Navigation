@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</ProjectGuid>
+    <ProjectGuid>{8CB1D2E3-94BD-4642-9CB4-988EB1E311BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Smart</RootNamespace>
-    <AssemblyName>Smart.Forms.Navigation</AssemblyName>
+    <AssemblyName>Smart.Forms.Navigation.Resolver</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -38,29 +38,20 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Forms\Navigation\Components\IActivator.cs" />
-    <Compile Include="Forms\Navigation\Components\IConverter.cs" />
-    <Compile Include="Forms\Navigation\Components\StandardActivator.cs" />
-    <Compile Include="Forms\Navigation\Components\StandardConverter.cs" />
-    <Compile Include="Forms\Navigation\IConfirmNavigation.cs" />
-    <Compile Include="Forms\Navigation\IConfirmNavigationAsync.cs" />
-    <Compile Include="Forms\Navigation\INavigationAware.cs" />
-    <Compile Include="Forms\Navigation\INavigatior.cs" />
-    <Compile Include="Forms\Navigation\IPageResolver.cs" />
-    <Compile Include="Forms\Navigation\NavigationContext.cs" />
-    <Compile Include="Forms\Navigation\NavigationParameters.cs" />
-    <Compile Include="Forms\Navigation\Navigator.cs" />
-    <Compile Include="Forms\Navigation\PageHelper.cs" />
-    <Compile Include="Forms\Navigation\PageResolver.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Forms\Navigation\Components\SmartResolverActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\Navigation\Plugins\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Smart, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Usa.Smart.Core.0.7.0\lib\portable-net45+win8+wpa81\Smart.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Smart.Resolver, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Usa.Smart.Resolver.1.2.2\lib\portable-net45+win8+wpa81\Smart.Resolver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Smart.Resolver.Xamarin, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Usa.Smart.Resolver.Xamarin.1.2.2\lib\portable-net45+win8+wpa81\Smart.Resolver.Xamarin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -78,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.Forms.Navigation\Smart.Forms.Navigation.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>Smart.Forms.Navigation</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
