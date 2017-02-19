@@ -1,10 +1,11 @@
 ﻿namespace Smart.Forms.Navigation
 {
     using System;
+    using System.Reflection;
 
     using Xamarin.Forms;
 
-    public class PageResolver : IPageResolver
+    public class DefaultPageResolver : IPageResolver
     {
         private const string Separator = "/";
 
@@ -35,7 +36,7 @@
         public Type ResolveType(string name)
         {
             var typeName = String.Concat(Namespace, name.Replace(Separator, "."));
-            return Type.GetType(typeName);
+            return Application.Current.GetType().GetTypeInfo().Assembly.GetType(typeName);
         }
 
         public string ResolveName(Type type)

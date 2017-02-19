@@ -10,14 +10,19 @@
 
     using Xamarin.Forms;
 
-    public class Navigator : NotificationObject, INavigatior
+    public class Navigator : NotificationObject, INavigator
     {
         private readonly IActivator activator;
 
         private readonly IPageResolver pageResolver;
 
+        public Navigator()
+            : this(new StandardActivator(), new DefaultPageResolver())
+        {
+        }
+
         public Navigator(IActivator activator)
-            : this(activator, new PageResolver())
+            : this(activator, new DefaultPageResolver())
         {
         }
 

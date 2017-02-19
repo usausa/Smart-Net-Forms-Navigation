@@ -45,13 +45,13 @@
     <Compile Include="Forms\Navigation\IConfirmNavigation.cs" />
     <Compile Include="Forms\Navigation\IConfirmNavigationAsync.cs" />
     <Compile Include="Forms\Navigation\INavigationAware.cs" />
-    <Compile Include="Forms\Navigation\INavigatior.cs" />
+    <Compile Include="Forms\Navigation\INavigator.cs" />
     <Compile Include="Forms\Navigation\IPageResolver.cs" />
     <Compile Include="Forms\Navigation\NavigationContext.cs" />
     <Compile Include="Forms\Navigation\NavigationParameters.cs" />
     <Compile Include="Forms\Navigation\Navigator.cs" />
     <Compile Include="Forms\Navigation\PageHelper.cs" />
-    <Compile Include="Forms\Navigation\PageResolver.cs" />
+    <Compile Include="Forms\Navigation\DefaultPageResolver.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    public interface INavigatior
+    public interface INavigator
     {
         Task<bool> Forward(string name);
 

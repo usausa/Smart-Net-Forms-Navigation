@@ -1,14 +1,35 @@
 ﻿namespace Example.FormsNavigation
 {
+    using Smart.Forms.Navigation;
+    using Smart.Forms.Navigation.Components;
+    using Smart.Resolver;
+
     using Xamarin.Forms;
 
     public partial class App : Application
     {
+        private IResolver Resolver { get; }
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new Example.FormsNavigation.MainPage();
+            var config = new ResolverConfig();
+            RegisterComponents(config);
+            Resolver = config.ToResolver();
+
+            var t = System.Type.GetType("Example.FormsNavigation.Pages.MenuPage");
+
+            MainPage = Resolver.Get<MainPage>();
+
+            var navigator = Resolver.Get<INavigator>();
+            navigator.Forward("/MenuPage");
+        }
+
+        private void RegisterComponents(ResolverConfig config)
+        {
+            config.Bind<IActivator>().To<SmartResolverActivator>().InSingletonScope();
+            config.Bind<INavigator>().To<Navigator>().InSingletonScope();
         }
 
         protected override void OnStart()
