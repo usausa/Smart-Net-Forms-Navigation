@@ -2,7 +2,10 @@
 <RuleSet Name="Smart.Forms.Navigation Rules" Description="Smart.Forms.Navigation Rules" ToolsVersion="14.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA2210" Action="None" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1101" Action="Hidden" />
+    <Rule Id="SA1652" Action="Hidden" />
   </Rules>
 </RuleSet>
