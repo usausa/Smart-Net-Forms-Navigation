@@ -44,6 +44,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MenuPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +58,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\" />
+    <Folder Include="Pages\Context\" />
+    <Folder Include="Pages\Modal\" />
+    <Folder Include="Pages\Parameter\" />
+    <Folder Include="Pages\Stack\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Smart, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">

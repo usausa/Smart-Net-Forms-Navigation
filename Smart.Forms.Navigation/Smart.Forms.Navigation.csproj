@@ -41,7 +41,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Navigation\" />
+    <Folder Include="Forms\Navigation\Components\" />
+    <Folder Include="Forms\Navigation\Plugins\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Smart, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
