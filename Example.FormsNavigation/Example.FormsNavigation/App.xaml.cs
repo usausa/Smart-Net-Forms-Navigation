@@ -18,8 +18,6 @@
             RegisterComponents(config);
             Resolver = config.ToResolver();
 
-            var t = System.Type.GetType("Example.FormsNavigation.Pages.MenuPage");
-
             MainPage = Resolver.Get<MainPage>();
 
             var navigator = Resolver.Get<INavigator>();
