@@ -16,20 +16,15 @@
 
         private readonly IPageResolver pageResolver;
 
-        public Navigator()
-            : this(new StandardActivator(), new DefaultPageResolver())
+        public Navigator(NavigatorConfig config)
+            : this(config.Activator, config.PageResolver)
         {
         }
 
-        public Navigator(IActivator activator)
-            : this(activator, new DefaultPageResolver())
+        public Navigator(IActivator activator = null, IPageResolver pageResolver = null)
         {
-        }
-
-        public Navigator(IActivator activator, IPageResolver pageResolver)
-        {
-            this.activator = activator;
-            this.pageResolver = pageResolver;
+            this.activator = activator ?? new StandardActivator();
+            this.pageResolver = pageResolver ?? new PathPageResolver();
         }
 
         public Task<bool> Forward(string name)

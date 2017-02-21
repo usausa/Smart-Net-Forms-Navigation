@@ -5,7 +5,7 @@
 
     using Xamarin.Forms;
 
-    public class DefaultPageResolver : IPageResolver
+    public class PathPageResolver : IPageResolver
     {
         private const string Separator = "/";
 

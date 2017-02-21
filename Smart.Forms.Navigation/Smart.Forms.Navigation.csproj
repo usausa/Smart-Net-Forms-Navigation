@@ -50,8 +50,9 @@
     <Compile Include="Forms\Navigation\NavigationContext.cs" />
     <Compile Include="Forms\Navigation\NavigationParameters.cs" />
     <Compile Include="Forms\Navigation\Navigator.cs" />
+    <Compile Include="Forms\Navigation\NavigatorConfig.cs" />
     <Compile Include="Forms\Navigation\PageHelper.cs" />
-    <Compile Include="Forms\Navigation\DefaultPageResolver.cs" />
+    <Compile Include="Forms\Navigation\PathPageResolver.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
