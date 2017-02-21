@@ -75,6 +75,9 @@
             // From event
             PageHelper.ProcessNavigatedFrom(fromPage, context);
 
+            // To event
+            PageHelper.ProcessNavigatingTo(toPage, context);
+
             // Replace new page
             await Application.Current.MainPage.Navigation.PushAsync(toPage);
             fromPage?.Apply(Application.Current.MainPage.Navigation.RemovePage);
@@ -133,6 +136,9 @@
             // From event
             fromPage?.Apply(x => PageHelper.ProcessNavigatedFrom(x, context));
 
+            // To event
+            PageHelper.ProcessNavigatingTo(toPage, context);
+
             // Replace new page
             await Application.Current.MainPage.Navigation.PushModalAsync(toPage);
 
@@ -181,6 +187,9 @@
 
             // From event
             PageHelper.ProcessNavigatedFrom(fromPage, context);
+
+            // To event
+            toPage?.Apply(x => PageHelper.ProcessNavigatingTo(x, context));
 
             // Replace new page
             await Application.Current.MainPage.Navigation.PopModalAsync();
