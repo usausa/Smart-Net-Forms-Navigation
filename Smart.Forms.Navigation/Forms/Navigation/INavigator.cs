@@ -4,16 +4,10 @@
 
     public interface INavigator
     {
-        Task<bool> Forward(string name);
+        Task<bool> ForwardAsync(string name, NavigationParameters parameters = null);
 
-        Task<bool> Forward(string name, NavigationParameters parameters);
+        Task<bool> PushModelAsync(string name, NavigationParameters parameters = null);
 
-        Task<bool> PushModel(string name);
-
-        Task<bool> PushModel(string name, NavigationParameters parameters);
-
-        Task<bool> PopModal();
-
-        Task<bool> PopModal(NavigationParameters parameters);
+        Task<bool> PopModalAsync(NavigationParameters parameters = null);
     }
 }

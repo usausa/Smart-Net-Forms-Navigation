@@ -27,12 +27,7 @@
             this.pageResolver = pageResolver ?? new PathPageResolver();
         }
 
-        public Task<bool> Forward(string name)
-        {
-            return Forward(name, new NavigationParameters());
-        }
-
-        public async Task<bool> Forward(string name, NavigationParameters parameter)
+        public async Task<bool> ForwardAsync(string name, NavigationParameters parameter)
         {
             // Guard
             if (Application.Current.MainPage.Navigation.ModalStack.Count > 0)
@@ -50,7 +45,7 @@
 
             // Context
             var context = new NavigationContext(
-                parameter,
+                parameter ?? new NavigationParameters(),
                 false,
                 normalizeName,
                 previousName);
@@ -91,12 +86,7 @@
             return true;
         }
 
-        public Task<bool> PushModel(string name)
-        {
-            return PushModel(name, new NavigationParameters());
-        }
-
-        public async Task<bool> PushModel(string name, NavigationParameters parameter)
+        public async Task<bool> PushModelAsync(string name, NavigationParameters parameter)
         {
             // Stack
             var modalStack = Application.Current.MainPage.Navigation.ModalStack;
@@ -111,7 +101,7 @@
 
             // Context
             var context = new NavigationContext(
-                parameter,
+                parameter ?? new NavigationParameters(),
                 false,
                 normalizeName,
                 previousName);
@@ -148,12 +138,7 @@
             return true;
         }
 
-        public Task<bool> PopModal()
-        {
-            return PopModal(new NavigationParameters());
-        }
-
-        public async Task<bool> PopModal(NavigationParameters parameter)
+        public async Task<bool> PopModalAsync(NavigationParameters parameter)
         {
             // Stack
             var modalStack = Application.Current.MainPage.Navigation.ModalStack;
@@ -174,7 +159,7 @@
 
             // Context
             var context = new NavigationContext(
-                parameter,
+                parameter ?? new NavigationParameters(),
                 true,
                 name,
                 previousName);

@@ -20,7 +20,7 @@
 
         private async Task Back()
         {
-            await navigator.Forward("/MenuPage");
+            await navigator.ForwardAsync("/MenuPage");
         }
     }
 }

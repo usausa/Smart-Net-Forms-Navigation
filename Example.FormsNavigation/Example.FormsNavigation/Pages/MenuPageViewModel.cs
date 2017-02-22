@@ -20,7 +20,7 @@
 
         private async Task Navigate(string page)
         {
-            await navigator.Forward(page);
+            await navigator.ForwardAsync(page);
         }
     }
 }

@@ -21,7 +21,7 @@
             MainPage = Resolver.Get<MainPage>();
 
             var navigator = Resolver.Get<INavigator>();
-            navigator.Forward("/MenuPage");
+            navigator.ForwardAsync("/MenuPage");
         }
 
         private void RegisterComponents(ResolverConfig config)
