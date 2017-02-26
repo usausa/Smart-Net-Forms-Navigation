@@ -60,7 +60,6 @@
     <Compile Include="Forms\Navigation\Plugins\Parameter\ParameterAttribute.cs" />
     <Compile Include="Forms\Navigation\Plugins\Parameter\ParameterPlugin.cs" />
     <Compile Include="Forms\Navigation\Plugins\PluginBase.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

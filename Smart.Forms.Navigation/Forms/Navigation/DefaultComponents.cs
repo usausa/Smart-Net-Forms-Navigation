@@ -4,7 +4,7 @@
     using Smart.Forms.Navigation.Plugins;
     using Smart.Forms.Navigation.Plugins.Parameter;
 
-    public class DefaultComponents
+    public static class DefaultComponents
     {
         private static IActivator activator;
 

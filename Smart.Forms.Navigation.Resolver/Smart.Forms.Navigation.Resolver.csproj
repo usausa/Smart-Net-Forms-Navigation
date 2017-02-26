@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Forms\Navigation\Components\SmartResolverActivator.cs" />
+    <Compile Include="Forms\Navigation\ResolverConfigExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

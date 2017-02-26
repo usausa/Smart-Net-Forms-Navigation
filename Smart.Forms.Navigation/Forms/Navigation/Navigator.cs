@@ -26,7 +26,7 @@
             this.plugins = plugins ?? new IPlugin[0];
         }
 
-        public async Task<bool> ForwardAsync(string name, NavigationParameters parameter)
+        public async Task<bool> ForwardAsync(string name, NavigationParameters parameters)
         {
             // Guard
             if (Application.Current.MainPage.Navigation.ModalStack.Count > 0)
@@ -44,7 +44,7 @@
 
             // Context
             var context = new NavigationContext(
-                parameter ?? new NavigationParameters(),
+                parameters ?? new NavigationParameters(),
                 false,
                 normalizeName,
                 previousName);
@@ -82,7 +82,7 @@
             return true;
         }
 
-        public async Task<bool> PushModelAsync(string name, NavigationParameters parameter)
+        public async Task<bool> PushModelAsync(string name, NavigationParameters parameters)
         {
             // Stack
             var modalStack = Application.Current.MainPage.Navigation.ModalStack;
@@ -97,7 +97,7 @@
 
             // Context
             var context = new NavigationContext(
-                parameter ?? new NavigationParameters(),
+                parameters ?? new NavigationParameters(),
                 false,
                 normalizeName,
                 previousName);
@@ -131,7 +131,7 @@
             return true;
         }
 
-        public async Task<bool> PopModalAsync(NavigationParameters parameter)
+        public async Task<bool> PopModalAsync(NavigationParameters parameters)
         {
             // Stack
             var modalStack = Application.Current.MainPage.Navigation.ModalStack;
@@ -152,7 +152,7 @@
 
             // Context
             var context = new NavigationContext(
-                parameter ?? new NavigationParameters(),
+                parameters ?? new NavigationParameters(),
                 true,
                 name,
                 previousName);

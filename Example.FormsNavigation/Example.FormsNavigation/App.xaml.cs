@@ -28,11 +28,7 @@
 
         private void RegisterComponents(ResolverConfig config)
         {
-            // TODO Xamarin DS
-            config.Bind<IActivator>().To<SmartResolverActivator>().InSingletonScope();
-            config.Bind<IConverter>().To<StandardConverter>().InSingletonScope();
-            config.Bind<IPlugin>().To<ParameterPlugin>().InSingletonScope();
-            config.Bind<INavigator>().To<Navigator>().InSingletonScope();
+            config.UseNavigator();
         }
 
         protected override void OnStart()

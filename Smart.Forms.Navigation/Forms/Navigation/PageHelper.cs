@@ -9,6 +9,8 @@
 
     public static class PageHelper
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Ignore")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public static void DestroyPage(Page page)
         {
             ProcessDispose(page);
@@ -21,6 +23,7 @@
             ((page as BindableObject)?.BindingContext as IDisposable)?.Dispose();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public static void Cleanup(VisualElement element)
         {
             element.Behaviors?.Clear();

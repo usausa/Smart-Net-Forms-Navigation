@@ -17,9 +17,10 @@
             set { @namespace = value; }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public string NormarizeName(string current, string name)
         {
-            if (name.StartsWith(Separator))
+            if (name.StartsWith(Separator, StringComparison.OrdinalIgnoreCase))
             {
                 return name;
             }
@@ -33,12 +34,14 @@
             return String.Concat(Separator, name);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public Type ResolveType(string name)
         {
             var typeName = String.Concat(Namespace, name.Replace(Separator, "."));
             return Application.Current.GetType().GetTypeInfo().Assembly.GetType(typeName);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public string ResolveName(Type type)
         {
             var name = type.FullName.Substring(Namespace.Length);
