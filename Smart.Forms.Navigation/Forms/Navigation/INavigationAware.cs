@@ -4,8 +4,6 @@
     {
         void OnNavigatedFrom(NavigationContext context);
 
-        void OnNavigatingTo(NavigationContext context);
-
         void OnNavigatedTo(NavigationContext context);
     }
 }

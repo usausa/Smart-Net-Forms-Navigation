@@ -81,12 +81,6 @@
             ((page as BindableObject)?.BindingContext as INavigationAware)?.OnNavigatedFrom(context);
         }
 
-        public static void ProcessNavigatingTo(object page, NavigationContext context)
-        {
-            (page as INavigationAware)?.OnNavigatingTo(context);
-            ((page as BindableObject)?.BindingContext as INavigationAware)?.OnNavigatingTo(context);
-        }
-
         public static void ProcessNavigatedTo(object page, NavigationContext context)
         {
             (page as INavigationAware)?.OnNavigatedTo(context);

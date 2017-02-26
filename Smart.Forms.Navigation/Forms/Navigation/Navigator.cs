@@ -6,6 +6,7 @@
 
     using Smart.ComponentModel;
     using Smart.Forms.Navigation.Components;
+    using Smart.Forms.Navigation.Plugins;
     using Smart.Functional;
 
     using Xamarin.Forms;
@@ -16,15 +17,13 @@
 
         private readonly IPageResolver pageResolver;
 
-        public Navigator(NavigatorConfig config)
-            : this(config.Activator, config.PageResolver)
-        {
-        }
+        private readonly IPlugin[] plugins;
 
-        public Navigator(IActivator activator = null, IPageResolver pageResolver = null)
+        public Navigator(IActivator activator = null, IPageResolver pageResolver = null, IPlugin[] plugins = null)
         {
-            this.activator = activator ?? new StandardActivator();
-            this.pageResolver = pageResolver ?? new PathPageResolver();
+            this.activator = activator ?? DefaultComponents.Activator;
+            this.pageResolver = pageResolver ?? DefaultComponents.PageResolver;
+            this.plugins = plugins ?? new IPlugin[0];
         }
 
         public async Task<bool> ForwardAsync(string name, NavigationParameters parameter)
@@ -60,7 +59,7 @@
             }
 
             // Prepare
-            var toPage = ResolvePage(normalizeName);
+            var toPage = CreatePage(normalizeName);
             if (toPage == null)
             {
                 throw new ArgumentException(
@@ -68,20 +67,17 @@
             }
 
             // From event
-            PageHelper.ProcessNavigatedFrom(fromPage, context);
-
-            // To event
-            PageHelper.ProcessNavigatingTo(toPage, context);
+            ProcessNavigatedFrom(fromPage, context);
 
             // Replace new page
             await Application.Current.MainPage.Navigation.PushAsync(toPage);
             fromPage?.Apply(Application.Current.MainPage.Navigation.RemovePage);
 
             // To event
-            PageHelper.ProcessNavigatedTo(toPage, context);
+            ProcessNavigatedTo(toPage, context);
 
             // Remove old page
-            fromPage?.Apply(PageHelper.DestroyPage);
+            ClosePage(fromPage);
 
             return true;
         }
@@ -116,7 +112,7 @@
             }
 
             // Prepare
-            var toPage = ResolvePage(normalizeName);
+            var toPage = CreatePage(normalizeName);
             if (toPage == null)
             {
                 throw new ArgumentException(
@@ -124,16 +120,13 @@
             }
 
             // From event
-            fromPage?.Apply(x => PageHelper.ProcessNavigatedFrom(x, context));
-
-            // To event
-            PageHelper.ProcessNavigatingTo(toPage, context);
+            ProcessNavigatedFrom(fromPage, context);
 
             // Replace new page
             await Application.Current.MainPage.Navigation.PushModalAsync(toPage);
 
             // To event
-            PageHelper.ProcessNavigatedTo(toPage, context);
+            ProcessNavigatedTo(toPage, context);
 
             return true;
         }
@@ -171,24 +164,21 @@
             }
 
             // From event
-            PageHelper.ProcessNavigatedFrom(fromPage, context);
-
-            // To event
-            toPage?.Apply(x => PageHelper.ProcessNavigatingTo(x, context));
+            ProcessNavigatedFrom(fromPage, context);
 
             // Replace new page
             await Application.Current.MainPage.Navigation.PopModalAsync();
 
             // To event
-            toPage?.Apply(x => PageHelper.ProcessNavigatedTo(x, context));
+            ProcessNavigatedTo(toPage, context);
 
             // Remove old page
-            PageHelper.DestroyPage(fromPage);
+            ClosePage(fromPage);
 
             return true;
         }
 
-        private Page ResolvePage(string name)
+        private Page CreatePage(string name)
         {
             var type = pageResolver.ResolveType(name);
             if (type == null)
@@ -196,7 +186,59 @@
                 return null;
             }
 
-            return (Page)activator.Get(type);
+            var page = (Page)activator.Get(type);
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnCreate(page);
+            }
+
+            return page;
+        }
+
+        private void ClosePage(Page page)
+        {
+            if (page == null)
+            {
+                return;
+            }
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnClose(page);
+            }
+
+            PageHelper.DestroyPage(page);
+        }
+
+        private void ProcessNavigatedFrom(Page page, NavigationContext context)
+        {
+            if (page == null)
+            {
+                return;
+            }
+
+            PageHelper.ProcessNavigatedFrom(page, context);
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatedFrom(page, context);
+            }
+        }
+
+        private void ProcessNavigatedTo(Page page, NavigationContext context)
+        {
+            if (page == null)
+            {
+                return;
+            }
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatedTo(page, context);
+            }
+
+            PageHelper.ProcessNavigatedTo(page, context);
         }
     }
 }

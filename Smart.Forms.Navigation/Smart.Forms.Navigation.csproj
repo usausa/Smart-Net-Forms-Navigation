@@ -50,15 +50,20 @@
     <Compile Include="Forms\Navigation\NavigationContext.cs" />
     <Compile Include="Forms\Navigation\NavigationParameters.cs" />
     <Compile Include="Forms\Navigation\Navigator.cs" />
-    <Compile Include="Forms\Navigation\NavigatorConfig.cs" />
+    <Compile Include="Forms\Navigation\DefaultComponents.cs" />
     <Compile Include="Forms\Navigation\PageHelper.cs" />
     <Compile Include="Forms\Navigation\PathPageResolver.cs" />
+    <Compile Include="Forms\Navigation\Plugins\AttributeProperty.cs" />
+    <Compile Include="Forms\Navigation\Plugins\AttributePropertyFactory.cs" />
+    <Compile Include="Forms\Navigation\Plugins\IPlugin.cs" />
+    <Compile Include="Forms\Navigation\Plugins\Parameter\Direction.cs" />
+    <Compile Include="Forms\Navigation\Plugins\Parameter\ParameterAttribute.cs" />
+    <Compile Include="Forms\Navigation\Plugins\Parameter\ParameterPlugin.cs" />
+    <Compile Include="Forms\Navigation\Plugins\PluginBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\Navigation\Plugins\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Smart, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Usa.Smart.Core.0.7.0\lib\portable-net45+win8+wpa81\Smart.dll</HintPath>

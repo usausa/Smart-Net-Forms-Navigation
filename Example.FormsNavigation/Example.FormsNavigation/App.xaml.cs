@@ -2,6 +2,8 @@
 {
     using Smart.Forms.Navigation;
     using Smart.Forms.Navigation.Components;
+    using Smart.Forms.Navigation.Plugins;
+    using Smart.Forms.Navigation.Plugins.Parameter;
     using Smart.Resolver;
 
     using Xamarin.Forms;
@@ -26,7 +28,10 @@
 
         private void RegisterComponents(ResolverConfig config)
         {
+            // TODO Xamarin DS
             config.Bind<IActivator>().To<SmartResolverActivator>().InSingletonScope();
+            config.Bind<IConverter>().To<StandardConverter>().InSingletonScope();
+            config.Bind<IPlugin>().To<ParameterPlugin>().InSingletonScope();
             config.Bind<INavigator>().To<Navigator>().InSingletonScope();
         }
 

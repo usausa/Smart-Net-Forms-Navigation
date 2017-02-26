@@ -15,7 +15,6 @@
 
         public object Get(Type type)
         {
-            // TODO IE?
             return resolver.Get(type);
         }
     }
