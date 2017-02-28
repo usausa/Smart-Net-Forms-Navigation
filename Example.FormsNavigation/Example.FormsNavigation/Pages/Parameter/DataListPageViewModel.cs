@@ -31,6 +31,10 @@
         {
         }
 
+        public void OnNavigatingTo(NavigationContext context)
+        {
+        }
+
         public void OnNavigatedTo(NavigationContext context)
         {
         }

@@ -30,7 +30,7 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigatedTo(Page page, NavigationContext context)
+        public override void OnNavigatingTo(Page page, NavigationContext context)
         {
             var parameters = context.Parameters.GetValueOr(ParameterName, default(Dictionary<string, object>));
             if (parameters != null)
