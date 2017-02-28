@@ -30,7 +30,7 @@
             element.Effects?.Clear();
             element.BindingContext = null;
 
-            var layout = element as Layout<View>;
+            var layout = element as IViewContainer<View>;
             if (layout != null)
             {
                 foreach (var child in layout.Children)
