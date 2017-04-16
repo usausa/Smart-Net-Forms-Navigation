@@ -2,7 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.Forms.Navigation\Smart.Forms.Navigation.csproj" />
+  </ItemGroup>
 
 </Project>
