@@ -53,6 +53,9 @@
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Smart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Usa.Smart.Core.1.0.0-beta5\lib\netstandard1.1\Smart.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -121,6 +124,14 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Smart.Forms.Navigation.Resolver\Smart.Forms.Navigation.Resolver.csproj">
+      <Project>{ceed81d5-0428-4a1e-8ad7-e84d5dfab973}</Project>
+      <Name>Smart.Forms.Navigation.Resolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Smart.Forms.Navigation\Smart.Forms.Navigation.csproj">
+      <Project>{b2734840-8574-4fb0-98ab-abe7e670176b}</Project>
+      <Name>Smart.Forms.Navigation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.FormsNavigation\Example.FormsNavigation.csproj">
       <Project>{e86a013f-3031-4140-924b-091bfee57dab}</Project>
       <Name>Example.FormsNavigation</Name>
