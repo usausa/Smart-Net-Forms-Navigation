@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>ナビゲーション</string>
 	<key>CFBundleIdentifier</key>
-	<string>usausa.FormsNavigation</string>
+	<string>usausa.Example.FormsNavigation</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
