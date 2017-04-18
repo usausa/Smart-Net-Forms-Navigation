@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>387d745d-aa49-4f1b-8d5d-1ccb74ecfe53</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Smart</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Components\IActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Components\IConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Components\StandardActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Components\StandardConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\DefaultComponents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\IConfirmNavigation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\IConfirmNavigationAsync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\INavigationAware.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\INavigator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\IPageResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\NavigationContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\NavigationParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Navigator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\PageHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\PathPageResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\AttributeProperty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\AttributePropertyFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\IPlugin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\Parameter\Direction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\Parameter\ParameterAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\Parameter\ParameterPlugin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Forms\Navigation\Plugins\PluginBase.cs" />
+  </ItemGroup>
+</Project>

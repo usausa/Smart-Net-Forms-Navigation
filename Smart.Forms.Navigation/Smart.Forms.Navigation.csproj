@@ -11,4 +11,6 @@
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
   </ItemGroup>
 
+  <Import Project="..\Navigation.Shared\Navigation.Shared.projitems" Label="Shared" />
+
 </Project>

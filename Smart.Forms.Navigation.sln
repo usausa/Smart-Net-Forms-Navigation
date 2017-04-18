@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.FormsNavigation.Android", "Example.FormsNavigation\Example.FormsNavigation.Android\Example.FormsNavigation.Android.csproj", "{BE97F51A-8099-4DA2-95CB-4C6DAE7C59BB}"
 EndProject
@@ -24,7 +24,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Forms.Navigation", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Forms.Navigation.Resolver", "Smart.Forms.Navigation.Resolver\Smart.Forms.Navigation.Resolver.csproj", "{CEED81D5-0428-4A1E-8AD7-E84D5DFAB973}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Navigation.Shared", "Navigation.Shared\Navigation.Shared.shproj", "{387D745D-AA49-4F1B-8D5D-1CCB74ECFE53}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Navigation.Shared\Navigation.Shared.projitems*{387d745d-aa49-4f1b-8d5d-1ccb74ecfe53}*SharedItemsImports = 13
+		Navigation.Shared\Navigation.Shared.projitems*{94651724-ddde-49f5-a8a5-c33001218212}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|iPhone = Ad-Hoc|iPhone
