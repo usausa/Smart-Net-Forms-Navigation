@@ -26,6 +26,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Forms.Navigation.Reso
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Navigation.Shared", "Navigation.Shared\Navigation.Shared.shproj", "{387D745D-AA49-4F1B-8D5D-1CCB74ECFE53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exapmle", "Exapmle", "{8C2FA703-BBAE-449A-85BE-9ABABF494A82}"
+	ProjectSection(SolutionItems) = preProject
+		Example.FormsNavigation\Example.FormsNavigation.ruleset = Example.FormsNavigation\Example.FormsNavigation.ruleset
+		Example.FormsNavigation\Settings.StyleCop = Example.FormsNavigation\Settings.StyleCop
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Navigation.Shared\Navigation.Shared.projitems*{387d745d-aa49-4f1b-8d5d-1ccb74ecfe53}*SharedItemsImports = 13
@@ -177,5 +183,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C2FA703-BBAE-449A-85BE-9ABABF494A82} = {B1026FC5-EA11-4CF5-92A9-B860A6B1A529}
 	EndGlobalSection
 EndGlobal
