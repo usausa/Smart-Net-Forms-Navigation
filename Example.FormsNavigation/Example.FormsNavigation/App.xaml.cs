@@ -1,14 +1,12 @@
 ﻿namespace Example.FormsNavigation
 {
-    using Xamarin.Forms;
-
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new Example.FormsNavigation.MainPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

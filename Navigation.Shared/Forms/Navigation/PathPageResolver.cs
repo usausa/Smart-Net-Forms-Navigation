@@ -13,8 +13,8 @@
 
         public string Namespace
         {
-            get { return @namespace ?? (@namespace = String.Concat(Application.Current.GetType().Namespace, ".Pages")); }
-            set { @namespace = value; }
+            get => @namespace ?? (@namespace = String.Concat(Application.Current.GetType().Namespace, ".Pages"));
+            set => @namespace = value;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]

@@ -1,8 +1,6 @@
 ﻿namespace Smart.Forms.Navigation
 {
     using Smart.Forms.Navigation.Components;
-    using Smart.Forms.Navigation.Plugins;
-    using Smart.Forms.Navigation.Plugins.Parameter;
 
     public static class DefaultComponents
     {
