@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Usa.Smart.Forms.Navigation</id>
-    <version>0.2.0</version>
+    <version>0.8.0</version>
     <title>Smart.Forms.Navigation .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
@@ -13,15 +13,16 @@
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Xamarin.Forms" version="2.3.3.180" />
-      <dependency id="Usa.Smart.Core" version="0.7.0" />
+      <dependency id="NETStandard.Library" version="1.6.1" />
+      <dependency id="Xamarin.Forms" version="2.3.4.231" />
+      <dependency id="Usa.Smart.Core" version="0.9.0" />
     </dependencies>
     <tags>smart xamarin navigation</tags>
   </metadata>
   <files>
-    <!-- PCL -->
-    <file src="Smart.Forms.Navigation\bin\Release\Smart.Forms.Navigation.dll" target="lib\portable-net45+win8+wpa81\Smart.Forms.Navigation.dll" />
-    <file src="Smart.Forms.Navigation\bin\Release\Smart.Forms.Navigation.pdb" target="lib\portable-net45+win8+wpa81\Smart.Forms.Navigation.pdb" />
-    <!--<file src="Smart.Forms.Navigation\bin\Release\Smart.Forms.Navigation.xml" target="lib\portable-net45+win8+wpa81\Smart.Forms.Navigation.xml" />-->
+    <!-- .NET Standard -->
+    <file src="Smart.Forms.Navigation\bin\Release\netstandard1.1\Smart.Forms.Navigation.dll" target="lib\netstandard1.1" />
+    <!--<file src="Smart.Forms.Navigation\bin\Release\netstandard1.1\Smart.Forms.Navigation.pdb" target="lib\netstandard1.1" />-->
+    <!--<file src="Smart.Forms.Navigation\bin\Release\netstandard1.1\Smart.Forms.Navigation.xml" target="lib\netstandard1.1" />-->
   </files>
 </package>

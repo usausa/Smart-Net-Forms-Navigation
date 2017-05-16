@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Forms.Navigation", "Smart.Forms.Navigation\Smart.Forms.Navigation.csproj", "{FCB3E4D8-DF9E-4BCC-BC0A-B7EC1AE9A903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Forms.Navigation.Resolver", "Smart.Forms.Navigation.Resolver\Smart.Forms.Navigation.Resolver.csproj", "{84C914BE-AE31-4D5A-B207-C2B5BB231800}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3FDE0046-DE47-42D8-AEBF-357BF9A6D3B5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Smart.Forms.Navigation.nuspec = Smart.Forms.Navigation.nuspec
+		Smart.Forms.Navigation.Resolver.nuspec = Smart.Forms.Navigation.Resolver.nuspec
+		Smart.Forms.Navigation.ruleset = Smart.Forms.Navigation.ruleset
+		Smart.Forms.Navigation.sln.DotSettings = Smart.Forms.Navigation.sln.DotSettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCB3E4D8-DF9E-4BCC-BC0A-B7EC1AE9A903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB3E4D8-DF9E-4BCC-BC0A-B7EC1AE9A903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB3E4D8-DF9E-4BCC-BC0A-B7EC1AE9A903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB3E4D8-DF9E-4BCC-BC0A-B7EC1AE9A903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C914BE-AE31-4D5A-B207-C2B5BB231800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C914BE-AE31-4D5A-B207-C2B5BB231800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C914BE-AE31-4D5A-B207-C2B5BB231800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C914BE-AE31-4D5A-B207-C2B5BB231800}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
