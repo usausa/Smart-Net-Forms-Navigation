@@ -20,10 +20,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MinimumOSVersion</key>
-	<string>10.3</string>
 	<key>CFBundleDisplayName</key>
-	<string>Example.FormsNavigation</string>
+	<string>Navigation</string>
 	<key>CFBundleIdentifier</key>
 	<string>usausa.Example.FormsNavigation</string>
 	<key>CFBundleVersion</key>
