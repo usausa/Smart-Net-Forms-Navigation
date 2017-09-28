@@ -30,8 +30,7 @@
             element.Effects?.Clear();
             element.BindingContext = null;
 
-            var layout = element as Layout<View>;
-            if (layout != null)
+            if (element is Layout<View> layout)
             {
                 foreach (var child in layout.Children)
                 {
@@ -46,8 +45,7 @@
 
         public static Task<bool> ProcessCanNavigateAsync(object page, NavigationContext context)
         {
-            var confirmNavigation = page as IConfirmNavigationAsync;
-            if (confirmNavigation != null)
+            if (page is IConfirmNavigationAsync confirmNavigation)
             {
                 return confirmNavigation.CanNavigateAsync(context);
             }
@@ -63,8 +61,7 @@
 
         public static bool ProcessCanNavigate(object page, NavigationContext context)
         {
-            var confirmNavigation = page as IConfirmNavigation;
-            if (confirmNavigation != null)
+            if (page is IConfirmNavigation confirmNavigation)
             {
                 return confirmNavigation.CanNavigate(context);
             }

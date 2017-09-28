@@ -15,8 +15,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public AttributeProperty<T>[] GetAttributeProperties(Type type)
         {
-            AttributeProperty<T>[] properties;
-            if (cache.TryGetValue(type, out properties))
+            if (cache.TryGetValue(type, out var properties))
             {
                 return properties;
             }
@@ -24,7 +23,7 @@
             properties = type.GetTypeInfo().DeclaredProperties
                 .SelectMany(
                     pi => pi.GetCustomAttributes(typeof(T)),
-                    (pi, attr) => new AttributeProperty<T>((T)attr, pi.ToAccessor()))
+                    (pi, attr) => new AttributeProperty<T>((T)attr, TypeMetadataFactory.Default.CreateAccessor(pi)))
                 .ToArray();
             cache[type] = properties;
 

@@ -74,8 +74,7 @@
                 if ((property.Attribute.Direction & Direction.Import) != 0)
                 {
                     var name = property.Attribute.Name ?? property.Accessor.Name;
-                    object value;
-                    if (parameters.TryGetValue(name, out value))
+                    if (parameters.TryGetValue(name, out var value))
                     {
                         property.Accessor.SetValue(target, converter.Convert(value, property.Accessor.Type));
                     }

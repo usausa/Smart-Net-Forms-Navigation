@@ -18,8 +18,7 @@
 
         public T GetValueOrDefault<T>(string key)
         {
-            object value;
-            return values.TryGetValue(key, out value) ? (T)value : default(T);
+            return values.TryGetValue(key, out var value) ? (T)value : default;
         }
 
         public T GetValueOrDefault<T>()
@@ -29,8 +28,7 @@
 
         public T GetValueOr<T>(string key, T defaultValue)
         {
-            object value;
-            return values.TryGetValue(key, out value) ? (T)value : defaultValue;
+            return values.TryGetValue(key, out var value) ? (T)value : defaultValue;
         }
 
         public T GetValueOr<T>(T defaultValue)
