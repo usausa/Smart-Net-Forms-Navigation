@@ -8,6 +8,8 @@
 
         void OnNavigatedFrom(Page page, NavigationContext context);
 
+        void OnNavigatingTo(Page page, NavigationContext context);
+
         void OnNavigatedTo(Page page, NavigationContext context);
 
         void OnClose(Page page);

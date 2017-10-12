@@ -12,6 +12,10 @@
         {
         }
 
+        public virtual void OnNavigatingTo(Page page, NavigationContext context)
+        {
+        }
+
         public virtual void OnNavigatedTo(Page page, NavigationContext context)
         {
         }
