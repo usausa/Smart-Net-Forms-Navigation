@@ -4,6 +4,8 @@
     using Android.Content.PM;
     using Android.OS;
 
+    using Smart.Resolver;
+
     [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -15,7 +17,19 @@
             base.OnCreate(bundle);
 
             Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+            LoadApplication(new App(new ComponentProvider()));
+        }
+
+        public override void OnBackPressed()
+        {
+            MoveTaskToBack(true);
+        }
+
+        private class ComponentProvider : IComponentProvider
+        {
+            public void RegisterComponents(ResolverConfig config)
+            {
+            }
         }
     }
 }
