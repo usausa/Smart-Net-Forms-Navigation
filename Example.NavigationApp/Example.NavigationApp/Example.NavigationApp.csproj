@@ -20,21 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Page.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Page.tt</DependentUpon>
-    </Compile>
     <Compile Update="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Page.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Page.cs</LastGenOutput>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
