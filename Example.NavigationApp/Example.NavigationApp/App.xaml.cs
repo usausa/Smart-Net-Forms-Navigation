@@ -24,7 +24,7 @@ namespace Example.NavigationApp
             MainPage = new NavigationPage { BarBackgroundColor = (Color)Resources["MetroBlueDark"] };
 
             var navigationService = Resolver.Get<INavigator>();
-            navigationService.ForwardAsync("/MenuPage");
+            navigationService.ForwardAsync(Page.Menu);
         }
 
         private void RegisterComponents(ResolverConfig config)
