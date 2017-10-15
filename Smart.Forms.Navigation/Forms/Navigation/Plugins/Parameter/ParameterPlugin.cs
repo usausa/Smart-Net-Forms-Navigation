@@ -15,7 +15,7 @@
 
         private readonly IConverter converter;
 
-        public ParameterPlugin(IConverter converter = null)
+        public ParameterPlugin(IConverter converter)
         {
             this.converter = converter ?? DefaultComponents.Converter;
         }
