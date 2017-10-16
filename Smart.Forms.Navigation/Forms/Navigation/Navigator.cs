@@ -24,6 +24,19 @@
             this.activator = activator ?? DefaultComponents.Activator;
             this.pageResolver = pageResolver ?? DefaultComponents.PageResolver;
             this.plugins = plugins ?? new IPlugin[0];
+
+            Application.Current.ModalPopping += OnModalPopping;
+            Application.Current.ModalPopped += OnModalPopped;
+        }
+
+        private void OnModalPopping(object sender, ModalPoppingEventArgs modalPoppingEventArgs)
+        {
+            // TODO
+        }
+
+        private void OnModalPopped(object sender, ModalPoppedEventArgs modalPoppedEventArgs)
+        {
+            // TODO
         }
 
         public async Task<bool> ForwardAsync(string name, NavigationParameters parameters)
