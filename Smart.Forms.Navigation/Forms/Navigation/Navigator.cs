@@ -11,13 +11,21 @@
 
     using Xamarin.Forms;
 
-    public class Navigator : NotificationObject, INavigator
+    public sealed class Navigator : NotificationObject, INavigator, IDisposable
     {
         private readonly IActivator activator;
 
         private readonly IPageResolver pageResolver;
 
         private readonly IPlugin[] plugins;
+
+        private bool navigating;
+
+        public bool Navigating
+        {
+            get => navigating;
+            set => SetProperty(ref navigating, value);
+        }
 
         public Navigator(IActivator activator = null, IPageResolver pageResolver = null, IPlugin[] plugins = null)
         {
@@ -27,6 +35,12 @@
 
             Application.Current.ModalPopping += OnModalPopping;
             Application.Current.ModalPopped += OnModalPopped;
+        }
+
+        public void Dispose()
+        {
+            Application.Current.ModalPopping -= OnModalPopping;
+            Application.Current.ModalPopped -= OnModalPopped;
         }
 
         private void OnModalPopping(object sender, ModalPoppingEventArgs modalPoppingEventArgs)
@@ -71,31 +85,40 @@
                 }
             }
 
-            // Prepare
-            var toPage = CreatePage(normalizeName);
-            if (toPage == null)
+            try
             {
-                throw new ArgumentException(
-                    String.Format(CultureInfo.InvariantCulture, "Invalid name. [{0}]", name), nameof(name));
+                Navigating = true;
+
+                // Prepare
+                var toPage = CreatePage(normalizeName);
+                if (toPage == null)
+                {
+                    throw new ArgumentException(
+                        String.Format(CultureInfo.InvariantCulture, "Invalid name. [{0}]", name), nameof(name));
+                }
+
+                // From event
+                ProcessNavigatedFrom(fromPage, context);
+
+                // To event
+                ProcessNavigatingTo(toPage, context);
+
+                // Replace new page
+                await Application.Current.MainPage.Navigation.PushAsync(toPage);
+                fromPage?.Apply(Application.Current.MainPage.Navigation.RemovePage);
+
+                // To event
+                ProcessNavigatedTo(toPage, context);
+
+                // Remove old page
+                ClosePage(fromPage);
+
+                return true;
             }
-
-            // From event
-            ProcessNavigatedFrom(fromPage, context);
-
-            // To event
-            ProcessNavigatingTo(toPage, context);
-
-            // Replace new page
-            await Application.Current.MainPage.Navigation.PushAsync(toPage);
-            fromPage?.Apply(Application.Current.MainPage.Navigation.RemovePage);
-
-            // To event
-            ProcessNavigatedTo(toPage, context);
-
-            // Remove old page
-            ClosePage(fromPage);
-
-            return true;
+            finally
+            {
+                Navigating = false;
+            }
         }
 
         public async Task<bool> PushModelAsync(string name, NavigationParameters parameters)
@@ -127,27 +150,36 @@
                 }
             }
 
-            // Prepare
-            var toPage = CreatePage(normalizeName);
-            if (toPage == null)
+            try
             {
-                throw new ArgumentException(
-                    String.Format(CultureInfo.InvariantCulture, "Invalid name. [{0}]", name), nameof(name));
+                Navigating = true;
+
+                // Prepare
+                var toPage = CreatePage(normalizeName);
+                if (toPage == null)
+                {
+                    throw new ArgumentException(
+                        String.Format(CultureInfo.InvariantCulture, "Invalid name. [{0}]", name), nameof(name));
+                }
+
+                // From event
+                ProcessNavigatedFrom(fromPage, context);
+
+                // To event
+                ProcessNavigatingTo(toPage, context);
+
+                // Replace new page
+                await Application.Current.MainPage.Navigation.PushModalAsync(toPage);
+
+                // To event
+                ProcessNavigatedTo(toPage, context);
+
+                return true;
             }
-
-            // From event
-            ProcessNavigatedFrom(fromPage, context);
-
-            // To event
-            ProcessNavigatingTo(toPage, context);
-
-            // Replace new page
-            await Application.Current.MainPage.Navigation.PushModalAsync(toPage);
-
-            // To event
-            ProcessNavigatedTo(toPage, context);
-
-            return true;
+            finally
+            {
+                Navigating = false;
+            }
         }
 
         public async Task<bool> PopModalAsync(NavigationParameters parameters)
@@ -182,22 +214,31 @@
                 return false;
             }
 
-            // From event
-            ProcessNavigatedFrom(fromPage, context);
+            try
+            {
+                Navigating = true;
 
-            // To event
-            ProcessNavigatingTo(toPage, context);
+                // From event
+                ProcessNavigatedFrom(fromPage, context);
 
-            // Replace new page
-            await Application.Current.MainPage.Navigation.PopModalAsync();
+                // To event
+                ProcessNavigatingTo(toPage, context);
 
-            // To event
-            ProcessNavigatedTo(toPage, context);
+                // Replace new page
+                await Application.Current.MainPage.Navigation.PopModalAsync();
 
-            // Remove old page
-            ClosePage(fromPage);
+                // To event
+                ProcessNavigatedTo(toPage, context);
 
-            return true;
+                // Remove old page
+                ClosePage(fromPage);
+
+                return true;
+            }
+            finally
+            {
+                Navigating = false;
+            }
         }
 
         private Page CreatePage(string name)
