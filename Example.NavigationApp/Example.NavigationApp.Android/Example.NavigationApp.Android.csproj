@@ -147,7 +147,7 @@
       <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.4.0.18342</Version>
+      <Version>2.4.0.38779</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Example.NavigationApp\Example.NavigationApp.projitems" Label="Shared" Condition="Exists('..\Example.NavigationApp\Example.NavigationApp.projitems')" />
