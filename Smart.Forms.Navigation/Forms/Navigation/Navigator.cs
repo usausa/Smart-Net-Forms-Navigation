@@ -45,13 +45,21 @@
 
         private void OnModalPopping(object sender, ModalPoppingEventArgs modalPoppingEventArgs)
         {
-            // TODO
+            if (!navigating)
+            {
+                // TODO
+            }
         }
 
         private void OnModalPopped(object sender, ModalPoppedEventArgs modalPoppedEventArgs)
         {
-            // TODO
+            if (!navigating)
+            {
+                // TODO
+            }
         }
+
+        // TODO Handle ?
 
         public async Task<bool> ForwardAsync(string name, NavigationParameters parameters)
         {
