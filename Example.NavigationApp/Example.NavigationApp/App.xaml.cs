@@ -1,13 +1,13 @@
-﻿using Smart.Forms.Components;
-using Smart.Forms.Navigation;
-using Smart.Resolver;
-
-using Xamarin.Forms;
-
-[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
+﻿[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
 
 namespace Example.NavigationApp
 {
+    using Smart.Forms.Components;
+    using Smart.Forms.Navigation;
+    using Smart.Resolver;
+
+    using Xamarin.Forms;
+
     public partial class App
     {
         private IResolver Resolver { get; }
