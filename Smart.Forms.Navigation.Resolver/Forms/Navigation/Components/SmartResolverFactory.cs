@@ -4,16 +4,16 @@
 
     using Smart.Resolver;
 
-    public class SmartResolverActivator : IActivator
+    public class SmartResolverFactory : IFactory
     {
         private readonly IResolver resolver;
 
-        public SmartResolverActivator(IResolver resolver)
+        public SmartResolverFactory(IResolver resolver)
         {
             this.resolver = resolver;
         }
 
-        public object Get(Type type)
+        public object Create(Type type)
         {
             return resolver.Get(type);
         }

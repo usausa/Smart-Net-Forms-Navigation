@@ -1,0 +1,126 @@
+NavigationPageBehavior poped
+
+
+            InitializeComponent();
+            var parameter = new NavigationParameters();
+            parameter["message"] = "Hello, Mercury!";
+            Container.Resolve<IApplicationService>().SetMainPage<MainPageViewModel>(parameter);
+-------------
+    public class ApplicationService : IApplicationService
+    {
+        private readonly Application _application;
+        private readonly IPageFactory _pageProvider;
+
+        public ApplicationService(Application application, IPageFactory pageProvider)
+            _application = application ?? throw new ArgumentNullException(nameof(application));
+            _pageProvider = pageProvider ?? throw new ArgumentNullException(nameof(pageProvider));
+            _application.ModalPopping += OnModalPopping;
+            _application.ModalPopped += OnModalPopped;
+
+        private Page _previousPage;
+
+        private void OnModalPopping(object sender, ModalPoppingEventArgs e)
+            int currentIndex = _application.MainPage.Navigation.ModalStack.Count - 1;
+            for (; 0 <= currentIndex; currentIndex--)
+            {
+                var page = _application.MainPage.Navigation.ModalStack[currentIndex];
+                if (page == e.Modal)
+                    break;
+            }
+            _previousPage = 0 < currentIndex
+                ? _application.MainPage.Navigation.ModalStack[currentIndex - 1]
+                : _application.MainPage;
+            e.Modal.OnDisposed();
+        }
+
+        private void OnModalPopped(object sender, ModalPoppedEventArgs e)
+        {
+            //var poppedPage = e.Modal;
+            var currentPage = _previousPage;
+            var parameters = new NavigationParameters();
+            currentPage.OnActivated(parameters);
+            //poppedPage.OnDisposed(parameters);
+        }
+
+        public void SetMainPage<TViewModel>(NavigationParameters parameters = default(NavigationParameters), bool animated = true, bool withNavigationPage = false)
+        {
+            var currentPage = _application.MainPage;
+            var nextPage = _pageProvider.CreatePage<TViewModel>(withNavigationPage);
+
+            nextPage.OnActivating(parameters);
+            currentPage.OnDeactivating(parameters);
+
+            _application.MainPage = nextPage;
+
+            nextPage.OnActivated(parameters);
+            currentPage.OnDeactivated(parameters);
+        }
+
+
+-------------
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MercuryWithPrismAutofac.ViewModels;assembly=MercuryWithPrismAutofac"
+             xmlns:mercury="clr-namespace:Mercury;assembly=Mercury"
+             x:Class="MercuryWithPrismAutofac.Views.MainPage"
+             Title="MainPage"
+             BindingContext="{Binding Source={x:Static viewModels:ViewModelLocator.MainPageViewModel}}">
+    <ContentPage.Behaviors>
+        <mercury:NavigationBehavior Navigator="{Binding Navigator}"
+                                    Activating="NavigationBehavior_OnLoading"
+                                    Deactivating="NavigationBehavior_OnUnloading"
+                                    Activated="NavigationBehavior_OnLoaded"
+                                    Deactivated="NavigationBehavior_OnUnloaded"
+                                    Disposed="NavigationBehavior_OnPopped"/>
+    </ContentPage.Behaviors>
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Label Text="{Binding Message}" />
+        <Button Text="Navigate Second" Command="{Binding NavigateCommand}"/>
+    </StackLayout>
+</ContentPage>
+
+    public partial class MainPage : ContentPage
+        private void NavigationBehavior_OnLoading(object sender, NavigationEventArgs e)
+            Debug.WriteLine($"{GetType().Name}#Activating");
+        private void NavigationBehavior_OnUnloading(object sender, NavigationEventArgs e)
+            Debug.WriteLine($"{GetType().Name}#Deactivating");
+        private void NavigationBehavior_OnLoaded(object sender, NavigationEventArgs e)
+            Debug.WriteLine($"{GetType().Name}#Activated");
+        private void NavigationBehavior_OnUnloaded(object sender, NavigationEventArgs e)
+            Debug.WriteLine($"{GetType().Name}#Deactivated");
+        private void NavigationBehavior_OnPopped(object sender, NavigationEventArgs e)
+            Debug.WriteLine($"{GetType().Name}#Disposed");
+
+-------------
+    public class ViewModelBase : BindableBase, INavigatable
+        public INavigator Navigator { get; }
+        public ViewModelBase(INavigator navigator)
+            Navigator = navigator;
+            Navigator.Activating += (sender, args) => { Debug.WriteLine($"{GetType().Name}#Activating"); };
+            Navigator.Deactivating += (sender, args) => { Debug.WriteLine($"{GetType().Name}#Deactivating"); };
+            Navigator.Activated += (sender, args) => { Debug.WriteLine($"{GetType().Name}#Activated"); };
+            Navigator.Deactivated += (sender, args) => { Debug.WriteLine($"{GetType().Name}#Deactivated"); };
+            Navigator.Disposed += (sender, args) => { Debug.WriteLine($"{GetType().Name}#Disposed"); };
+
+    public class MainPageViewModel : ViewModelBase
+        private string _message;
+        public ICommand NavigateCommand => new DelegateCommand(() => Navigator.PushModalAsync<SecondPageViewModel>(withNavigationPage:true));
+        public MainPageViewModel(INavigator navigator) : base(navigator)
+            Navigator.Activating += OnActivating;
+        private void OnActivating(object sender, NavigationEventArgs e)
+
+    public class SecondPageViewModel : ViewModelBase
+        public ICommand NavigateThirdCommand => new DelegateCommand(() => Navigator.PushAsync<ThirdPageViewModel>());
+        public ICommand PopCommand => new DelegateCommand(() => Navigator.PopModalAsync());
+        public SecondPageViewModel(INavigator navigator) : base(navigator)
+
+    public class ThirdPageViewModel : ViewModelBase
+        public ICommand PopCommand => new DelegateCommand(() => Navigator.PopAsync());
+        public ICommand PopToRootCommand => new DelegateCommand(() => Navigator.PopToRootAsync());
+        public ICommand NavigateFourthCommand => new DelegateCommand(() => Navigator.PushModalAsync<FourthPageViewModel>());
+        public ThirdPageViewModel(INavigator navigator) : base(navigator)
+
+    public class FourthPageViewModel : ViewModelBase
+        public ICommand PopModalCommand => new DelegateCommand(() => Navigator.PopModalAsync());
+        public FourthPageViewModel(INavigator navigator) : base(navigator)

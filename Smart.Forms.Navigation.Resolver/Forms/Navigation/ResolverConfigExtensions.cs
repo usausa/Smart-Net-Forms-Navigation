@@ -12,7 +12,7 @@
         public static void UseNavigator(this ResolverConfig config)
         {
             config.Components.Add<DependencyServiceMissingHandler>();
-            config.Bind<IActivator>().To<SmartResolverActivator>().InSingletonScope();
+            config.Bind<IFactory>().To<SmartResolverFactory>().InSingletonScope();
             config.Bind<IConverter>().To<StandardConverter>().InSingletonScope();
             config.Bind<IPlugin>().To<ParameterPlugin>().InSingletonScope();
             config.Bind<INavigator>().To<Navigator>().InSingletonScope();

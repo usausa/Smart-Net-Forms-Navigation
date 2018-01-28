@@ -13,7 +13,7 @@
 
     public sealed class Navigator : NotificationObject, INavigator, IDisposable
     {
-        private readonly IActivator activator;
+        private readonly IFactory factory;
 
         private readonly IPageResolver pageResolver;
 
@@ -27,9 +27,9 @@
             set => SetProperty(ref navigating, value);
         }
 
-        public Navigator(IActivator activator = null, IPageResolver pageResolver = null, IPlugin[] plugins = null)
+        public Navigator(IFactory factory = null, IPageResolver pageResolver = null, IPlugin[] plugins = null)
         {
-            this.activator = activator ?? DefaultComponents.Activator;
+            this.factory = factory ?? DefaultComponents.Factory;
             this.pageResolver = pageResolver ?? DefaultComponents.PageResolver;
             this.plugins = plugins ?? new IPlugin[0];
 
@@ -78,7 +78,8 @@
             var normalizeName = pageResolver.NormarizeName(previousName, name);
 
             // Context
-            var context = new NavigationContext(
+            var pluginContext = new PluginContext();
+            var navigationContext = new NavigationContext(
                 parameters ?? new NavigationParameters(),
                 false,
                 normalizeName,
@@ -87,7 +88,7 @@
             // Confirm
             if (fromPage != null)
             {
-                if (!await PageHelper.ProcessCanNavigateAsync(fromPage, context))
+                if (!await PageHelper.ProcessCanNavigateAsync(fromPage, navigationContext))
                 {
                     return false;
                 }
@@ -98,7 +99,7 @@
                 Navigating = true;
 
                 // Prepare
-                var toPage = CreatePage(normalizeName);
+                var toPage = CreatePage(normalizeName, pluginContext);
                 if (toPage == null)
                 {
                     throw new ArgumentException(
@@ -106,20 +107,20 @@
                 }
 
                 // From event
-                ProcessNavigatedFrom(fromPage, context);
+                ProcessNavigatedFrom(fromPage, navigationContext, pluginContext);
 
                 // To event
-                ProcessNavigatingTo(toPage, context);
+                ProcessNavigatingTo(toPage, navigationContext, pluginContext);
 
                 // Replace new page
                 await Application.Current.MainPage.Navigation.PushAsync(toPage);
                 fromPage?.Apply(Application.Current.MainPage.Navigation.RemovePage);
 
                 // To event
-                ProcessNavigatedTo(toPage, context);
+                ProcessNavigatedTo(toPage, navigationContext, pluginContext);
 
                 // Remove old page
-                ClosePage(fromPage);
+                ClosePage(fromPage, pluginContext);
 
                 return true;
             }
@@ -143,7 +144,8 @@
             var normalizeName = pageResolver.NormarizeName(previousName, name);
 
             // Context
-            var context = new NavigationContext(
+            var pluginContext = new PluginContext();
+            var navigationContext = new NavigationContext(
                 parameters ?? new NavigationParameters(),
                 false,
                 normalizeName,
@@ -152,7 +154,7 @@
             // Confirm
             if (fromPage != null)
             {
-                if (!await PageHelper.ProcessCanNavigateAsync(fromPage, context))
+                if (!await PageHelper.ProcessCanNavigateAsync(fromPage, navigationContext))
                 {
                     return false;
                 }
@@ -163,7 +165,7 @@
                 Navigating = true;
 
                 // Prepare
-                var toPage = CreatePage(normalizeName);
+                var toPage = CreatePage(normalizeName, pluginContext);
                 if (toPage == null)
                 {
                     throw new ArgumentException(
@@ -171,16 +173,16 @@
                 }
 
                 // From event
-                ProcessNavigatedFrom(fromPage, context);
+                ProcessNavigatedFrom(fromPage, navigationContext, pluginContext);
 
                 // To event
-                ProcessNavigatingTo(toPage, context);
+                ProcessNavigatingTo(toPage, navigationContext, pluginContext);
 
                 // Replace new page
                 await Application.Current.MainPage.Navigation.PushModalAsync(toPage);
 
                 // To event
-                ProcessNavigatedTo(toPage, context);
+                ProcessNavigatedTo(toPage, navigationContext, pluginContext);
 
                 return true;
             }
@@ -210,14 +212,15 @@
             var name = toPage != null ? pageResolver.ResolveName(toPage.GetType()) : string.Empty;
 
             // Context
-            var context = new NavigationContext(
+            var pluginContext = new PluginContext();
+            var navigationContext = new NavigationContext(
                 parameters ?? new NavigationParameters(),
                 true,
                 name,
                 previousName);
 
             // Confirm
-            if (!await PageHelper.ProcessCanNavigateAsync(fromPage, context))
+            if (!await PageHelper.ProcessCanNavigateAsync(fromPage, navigationContext))
             {
                 return false;
             }
@@ -227,19 +230,19 @@
                 Navigating = true;
 
                 // From event
-                ProcessNavigatedFrom(fromPage, context);
+                ProcessNavigatedFrom(fromPage, navigationContext, pluginContext);
 
                 // To event
-                ProcessNavigatingTo(toPage, context);
+                ProcessNavigatingTo(toPage, navigationContext, pluginContext);
 
                 // Replace new page
                 await Application.Current.MainPage.Navigation.PopModalAsync();
 
                 // To event
-                ProcessNavigatedTo(toPage, context);
+                ProcessNavigatedTo(toPage, navigationContext, pluginContext);
 
                 // Remove old page
-                ClosePage(fromPage);
+                ClosePage(fromPage, pluginContext);
 
                 return true;
             }
@@ -249,7 +252,7 @@
             }
         }
 
-        private Page CreatePage(string name)
+        private Page CreatePage(string name, PluginContext pluginContext)
         {
             var type = pageResolver.ResolveType(name);
             if (type == null)
@@ -257,17 +260,17 @@
                 return null;
             }
 
-            var page = (Page)activator.Get(type);
+            var page = (Page)factory.Create(type);
 
             foreach (var plugin in plugins)
             {
-                plugin.OnCreate(page);
+                plugin.OnCreate(pluginContext, page);
             }
 
             return page;
         }
 
-        private void ClosePage(Page page)
+        private void ClosePage(Page page, PluginContext pluginContext)
         {
             if (page == null)
             {
@@ -276,28 +279,28 @@
 
             foreach (var plugin in plugins)
             {
-                plugin.OnClose(page);
+                plugin.OnClose(pluginContext, page);
             }
 
             PageHelper.DestroyPage(page);
         }
 
-        private void ProcessNavigatedFrom(Page page, NavigationContext context)
+        private void ProcessNavigatedFrom(Page page, NavigationContext navigationContext, PluginContext pluginContext)
         {
             if (page == null)
             {
                 return;
             }
 
-            PageHelper.ProcessNavigatedFrom(page, context);
+            PageHelper.ProcessNavigatedFrom(page, navigationContext);
 
             foreach (var plugin in plugins)
             {
-                plugin.OnNavigatedFrom(page, context);
+                plugin.OnNavigatedFrom(pluginContext, page);
             }
         }
 
-        private void ProcessNavigatingTo(Page page, NavigationContext context)
+        private void ProcessNavigatingTo(Page page, NavigationContext navigationContext, PluginContext pluginContext)
         {
             if (page == null)
             {
@@ -306,13 +309,13 @@
 
             foreach (var plugin in plugins)
             {
-                plugin.OnNavigatingTo(page, context);
+                plugin.OnNavigatingTo(pluginContext, page);
             }
 
-            PageHelper.ProcessNavigatingTo(page, context);
+            PageHelper.ProcessNavigatingTo(page, navigationContext);
         }
 
-        private void ProcessNavigatedTo(Page page, NavigationContext context)
+        private void ProcessNavigatedTo(Page page, NavigationContext navigationContext, PluginContext pluginContext)
         {
             if (page == null)
             {
@@ -321,10 +324,10 @@
 
             foreach (var plugin in plugins)
             {
-                plugin.OnNavigatedTo(page, context);
+                plugin.OnNavigatedTo(pluginContext, page);
             }
 
-            PageHelper.ProcessNavigatedTo(page, context);
+            PageHelper.ProcessNavigatedTo(page, navigationContext);
         }
     }
 }

@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class StandardActivator : IActivator
+    public class StandardFactory : IFactory
     {
-        public object Get(Type type)
+        public object Create(Type type)
         {
             // TODO
             return Activator.CreateInstance(type);

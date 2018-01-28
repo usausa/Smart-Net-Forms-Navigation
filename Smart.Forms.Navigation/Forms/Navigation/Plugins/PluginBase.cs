@@ -4,23 +4,23 @@
 
     public abstract class PluginBase : IPlugin
     {
-        public virtual void OnCreate(Page page)
+        public virtual void OnCreate(IPluginContext context, Page page)
         {
         }
 
-        public virtual void OnNavigatedFrom(Page page, NavigationContext context)
+        public virtual void OnClose(IPluginContext context, Page page)
         {
         }
 
-        public virtual void OnNavigatingTo(Page page, NavigationContext context)
+        public virtual void OnNavigatedFrom(IPluginContext context, Page page)
         {
         }
 
-        public virtual void OnNavigatedTo(Page page, NavigationContext context)
+        public virtual void OnNavigatingTo(IPluginContext context, Page page)
         {
         }
 
-        public virtual void OnClose(Page page)
+        public virtual void OnNavigatedTo(IPluginContext context, Page page)
         {
         }
     }

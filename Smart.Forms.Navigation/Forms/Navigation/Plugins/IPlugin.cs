@@ -4,14 +4,14 @@
 
     public interface IPlugin
     {
-        void OnCreate(Page page);
+        void OnCreate(IPluginContext context, Page page);
 
-        void OnNavigatedFrom(Page page, NavigationContext context);
+        void OnClose(IPluginContext context, Page page);
 
-        void OnNavigatingTo(Page page, NavigationContext context);
+        void OnNavigatedFrom(IPluginContext context, Page page);
 
-        void OnNavigatedTo(Page page, NavigationContext context);
+        void OnNavigatingTo(IPluginContext context, Page page);
 
-        void OnClose(Page page);
+        void OnNavigatedTo(IPluginContext context, Page page);
     }
 }

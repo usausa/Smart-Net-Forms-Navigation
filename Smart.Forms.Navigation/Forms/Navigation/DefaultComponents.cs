@@ -4,13 +4,13 @@
 
     public static class DefaultComponents
     {
-        private static IActivator activator;
+        private static IFactory factory;
 
         private static IConverter converter;
 
         private static IPageResolver pageResolver;
 
-        public static IActivator Activator => activator ?? (activator = new StandardActivator());
+        public static IFactory Factory => factory ?? (factory = new StandardFactory());
 
         public static IConverter Converter => converter ?? (converter = new StandardConverter());
 

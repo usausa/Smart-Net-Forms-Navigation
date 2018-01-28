@@ -5,28 +5,28 @@
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class ScopeAttribute : Attribute
     {
-        public string Key { get; }
+        public string Name { get; }
 
-        public Type ConcreateType { get; }
+        public Type RequestType { get; }
 
         public ScopeAttribute()
         {
         }
 
-        public ScopeAttribute(string key)
-            : this(key, null)
+        public ScopeAttribute(string name)
+            : this(name, null)
         {
         }
 
-        public ScopeAttribute(Type concreateType)
-            : this(null, concreateType)
+        public ScopeAttribute(Type requestType)
+            : this(null, requestType)
         {
         }
 
-        public ScopeAttribute(string key, Type concreateType)
+        public ScopeAttribute(string name, Type requestType)
         {
-            Key = key;
-            ConcreateType = concreateType;
+            Name = name;
+            RequestType = requestType;
         }
     }
 }

@@ -5,26 +5,26 @@
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class ParameterAttribute : Attribute
     {
-        public Direction Direction { get; }
+        public Directions Direction { get; }
 
         public string Name { get; }
 
         public ParameterAttribute()
-            : this(Direction.Both, null)
+            : this(Directions.Both, null)
         {
         }
 
         public ParameterAttribute(string name)
-            : this(Direction.Both, name)
+            : this(Directions.Both, name)
         {
         }
 
-        public ParameterAttribute(Direction direction)
+        public ParameterAttribute(Directions direction)
             : this(direction, null)
         {
         }
 
-        public ParameterAttribute(Direction direction, string name)
+        public ParameterAttribute(Directions direction, string name)
         {
             Direction = direction;
             Name = name;

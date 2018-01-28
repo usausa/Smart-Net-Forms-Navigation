@@ -6,7 +6,7 @@
     ///
     /// </summary>
     [Flags]
-    public enum Direction
+    public enum Directions
     {
         Import = 0x00000001,
         Export = 0x00000002,
