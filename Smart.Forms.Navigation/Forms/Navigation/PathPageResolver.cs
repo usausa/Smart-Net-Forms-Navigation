@@ -18,16 +18,16 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public string NormarizeName(string current, string name)
+        public string NormalizeName(string current, string name)
         {
-            if (name.StartsWith(Separator, StringComparison.OrdinalIgnoreCase))
+            if (name.StartsWith(Separator, StringComparison.Ordinal))
             {
                 return name;
             }
 
             if (!String.IsNullOrEmpty(current))
             {
-                var index = current.LastIndexOf(Separator, StringComparison.OrdinalIgnoreCase);
+                var index = current.LastIndexOf(Separator, StringComparison.Ordinal);
                 return String.Concat(current.Substring(0, index + 1), name);
             }
 

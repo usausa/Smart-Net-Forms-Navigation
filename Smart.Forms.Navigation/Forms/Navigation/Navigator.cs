@@ -75,7 +75,7 @@
             var fromPage = navigationStack.Count > 0 ? navigationStack[navigationStack.Count - 1] : null;
 
             var previousName = fromPage != null ? pageResolver.ResolveName(fromPage.GetType()) : string.Empty;
-            var normalizeName = pageResolver.NormarizeName(previousName, name);
+            var normalizeName = pageResolver.NormalizeName(previousName, name);
 
             // Context
             var pluginContext = new PluginContext();
@@ -141,7 +141,7 @@
                 : navigationStack.Count > 0 ? navigationStack[navigationStack.Count - 1] : null;
 
             var previousName = fromPage != null ? pageResolver.ResolveName(fromPage.GetType()) : string.Empty;
-            var normalizeName = pageResolver.NormarizeName(previousName, name);
+            var normalizeName = pageResolver.NormalizeName(previousName, name);
 
             // Context
             var pluginContext = new PluginContext();

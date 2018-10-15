@@ -19,7 +19,7 @@
             public int Counter { get; set; }
         }
 
-        private readonly Dictionary<Type, ScopeProperty[]> typePropertieses = new Dictionary<Type, ScopeProperty[]>();
+        private readonly Dictionary<Type, ScopeProperty[]> typeProperties = new Dictionary<Type, ScopeProperty[]>();
 
         private readonly IDelegateFactory delegateFactory;
 
@@ -35,7 +35,7 @@
 
         private ScopeProperty[] GetTypeProperties(Type type)
         {
-            if (!typePropertieses.TryGetValue(type, out var properties))
+            if (!typeProperties.TryGetValue(type, out var properties))
             {
                 properties = type.GetProperties()
                     .Select(x => new
@@ -49,7 +49,7 @@
                         x.Attribute.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property),
                         delegateFactory.CreateSetter(x.Property, true)))
                     .ToArray();
-                typePropertieses[type] = properties;
+                typeProperties[type] = properties;
             }
 
             return properties;

@@ -4,7 +4,7 @@
 
     public interface IPageResolver
     {
-        string NormarizeName(string current, string name);
+        string NormalizeName(string current, string name);
 
         Type ResolveType(string name);
 

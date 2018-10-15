@@ -12,7 +12,7 @@
 
     public class ParameterPlugin : PluginBase
     {
-        private readonly Dictionary<Type, ParameterProperty[]> typePropertieses = new Dictionary<Type, ParameterProperty[]>();
+        private readonly Dictionary<Type, ParameterProperty[]> typeProperties = new Dictionary<Type, ParameterProperty[]>();
 
         private readonly IDelegateFactory delegateFactory;
 
@@ -26,7 +26,7 @@
 
         private ParameterProperty[] GetTypeProperties(Type type)
         {
-            if (!typePropertieses.TryGetValue(type, out var properties))
+            if (!typeProperties.TryGetValue(type, out var properties))
             {
                 properties = type.GetProperties()
                     .Select(x => new
@@ -41,7 +41,7 @@
                         (x.Attribute.Direction & Directions.Export) != 0 ? delegateFactory.CreateGetter(x.Property, true) : null,
                         (x.Attribute.Direction & Directions.Import) != 0 ? delegateFactory.CreateSetter(x.Property, true) : null))
                     .ToArray();
-                typePropertieses[type] = properties;
+                typeProperties[type] = properties;
             }
 
             return properties;
